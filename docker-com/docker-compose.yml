@@ -1,0 +1,85 @@
+version: '3.7'
+networks:
+  monitor:
+    driver: bridge
+
+services:
+  #
+  # prometheus
+  #
+  prometheus:
+    image: prometheus
+    container_name: prometheus
+    hostname: prometheus
+    restart: always
+    command:
+    - --web.enable-lifecycle
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/prometheus
+    - --web.console.libraries=/usr/share/prometheus/console_libraries
+    - --web.console.templates=/usr/share/prometheus/consoles
+    - --storage.tsdb.min-block-duration=1m # small just to not wait hours to test :)
+    - --storage.tsdb.max-block-duration=1m # small just to not wait hours to test :)
+    - --storage.tsdb.retention.time=336h
+    - --web.external-url=http://35.189.162.254:9090
+    - --web.enable-admin-api
+    volumes:
+    - ./prometheus/conf/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./alertmanager/conf/rules/alert_rules.yml:/etc/prometheus/alert_rules.yml
+    - ./prometheus/data:/usr/local/share/prometheus/data
+    ports: 
+    - "9090:9090"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+    ulimits:
+      nofile:
+        soft: 98304
+        hard: 98304
+    networks:
+    - monitor
+
+  grafana:
+    image: grafana
+    volumes:
+    - ./grafana/conf/defaults.ini:/usr/share/grafana/conf/defaults.ini
+    - ./grafana/conf/run.sh:/run.sh
+    - ./grafana/data:/grafana
+    container_name: grafana
+    hostname: grafana
+    restart: always
+    ports:
+    - "3000:3000"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+    networks:
+    - monitor
+
+  kirby:
+    restart: always
+    build: ./kirby
+    container_name: kirby
+    volumes:
+      - ./kirby:/app
+    ports:
+      - "8080:8080"
+    command: mvn clean spring-boot:run -Dspring-boot.run.profiles=docker
+
+    #  alertmanager:
+    #    image: prom/alertmanager
+    #    container_name: alertmanager
+    #    hostname: alertmanager
+    #    restart: always
+    #    ports:
+    #      - '9093:9093'
+    #    volumes:
+    #      - ./data/alertmanager:/alertmanager/data
+    #      - ./alertmanager/conf/alertmanager.yml:/alertmanager.yml
+    #    command:
+    #      - "--config.file=/alertmanager.yml"
+    #      - "--web.external-url=http://35.236.168.214:9093"
+    #    networks:
+    #      - monitor

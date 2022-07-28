@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table,
+td {
+	border: 1px solid #333;
+}
+
+thead,
+tfoot {
+	background-color: #333;
+	color: #fff;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+var apiurl="[[${rest_url}]]";
+
+function IsRemoteControl() {
+	var inputurl = apiurl.concat("/mqtt/vpn/is-remote-control");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function CheckLogin() {
+	var inputurl = apiurl.concat("/mqtt/vpn/check-login");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function DeviceInfo() {
+	var inputurl = apiurl.concat("/mqtt/vpn/get-deviceinfo");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function Login() {
+	var inputurl = apiurl.concat("/mqtt/vpn/login");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val(),
+        	username: $("#queryusername").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function VpnOnOff() {
+	var inputurl = apiurl.concat("/mqtt/vpn/vpn-on-off");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val(),
+        	vpnonoff: parseInt($("#queryvpnonoff").val()),
+        	devip: $("#queryip").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function CheckFw() {
+	var inputurl = apiurl.concat("/mqtt/vpn/check-fw");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function UpgradeFw() {
+	var inputurl = apiurl.concat("/mqtt/vpn/upgrade-fw");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+/* function Logout() {
+	var inputurl = apiurl.concat("/mqtt/vpn/logout");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+} */
+
+function HostInfo() {
+	var inputurl = apiurl.concat("/mqtt/vpn/get-hostinfo");
+	var token=$("#querytoken").val();
+	console.log(inputurl)
+	console.log($("#queryserialno").val());
+	$("#result").text("");
+    $.ajax({
+        type: 'POST',
+        url: inputurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+        	serialno: $("#queryserialno").val()
+        }),
+        success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+            $("#result").text(request.responseText);
+        }
+    });
+}
+
+function GetToken() {
+	var inputurl = apiurl.concat("/mqtt/get-token");
+    $.ajax({
+        type: 'GET',
+        url: inputurl,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            console.log(JSON.stringify(response));
+            $("#gettoken").text(JSON.stringify(response));
+            document.getElementById("querytoken").value = JSON.stringify(response);
+        },
+        error: function (request, status, error) {
+        	$("#gettoken").text(request.responseText);
+        	 document.getElementById("querytoken").value = request.responseText;
+        }
+    });
+}
+
+$(document).ready(function () {
+    $("#btnIsRemoteControl").click(function () {
+    	IsRemoteControl();
+    });
+    $("#btnIsRemoteControl").click(function () {
+    	IsRemoteControl();
+    });
+    $("#btnCheckLogin").click(function () {
+    	CheckLogin();
+    });
+    $("#btnDeviceInfo").click(function () {
+    	DeviceInfo();
+    });
+    
+    $("#btnLogin").click(function () {
+    	Login();
+    });
+    
+    $("#btnVpnOnOff").click(function () {
+    	VpnOnOff();
+    });
+    
+    $("#btnCheckFw").click(function () {
+    	CheckFw();
+    });
+    
+    $("#btnUpgradeFw").click(function () {
+    	UpgradeFw();
+    });
+    
+/*     $("#btnLogout").click(function () {
+    	Logout();
+    }); */
+    
+    $("#btnHostInfo").click(function () {
+    	HostInfo();
+    });
+    
+    $("#btnToken").click(function () {
+    	GetToken();
+    });
+});
+</script>
+</head>
+<body>
+	<p>
+	<label>Serial No</label>
+	<input id="queryserialno" type="text" placeholder="abc" value="abc">
+	</p>
+	<p>
+	<label>User Name</label>
+	<input id="queryusername" type="text" placeholder="1" value="aaa">
+	</p>
+	<p>
+	<label>VPN On Off</label>
+	<input id="queryvpnonoff" type="text" placeholder="1" value="1">
+	</p>
+	<p>
+	<label>Dev Ip</label>
+	<input id="queryip" type="text" placeholder="192.168.47.100" value="192.168.47.100">
+	</p>
+	<p>
+	<label>Token</label>
+	<input id="querytoken" type="text" placeholder="Token" value="Token">
+	</p>
+	<p><button id="btnToken">Get Token</button></p>
+    <p>Buttons</p>
+    <button id="btnIsRemoteControl">Is Remote Control</button>
+    <button id="btnCheckLogin">Check Login</button>
+    <button id="btnDeviceInfo">Device Info</button>
+    <button id="btnLogin">Login</button>
+    <button id="btnVpnOnOff">Vpn On Off</button>
+    <button id="btnCheckFw">Check FW</button>
+    <button id="btnUpgradeFw">Upgrade FW</button>
+<!--     <button id="btnLogout">Logout</button> -->
+    <button id="btnHostInfo">Host Info</button>
+    <p id="gettoken">token
+    <p>
+    <p id="result">result
+    <p>
+</body>
+</html>

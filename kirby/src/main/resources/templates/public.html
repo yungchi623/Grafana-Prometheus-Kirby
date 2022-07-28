@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get Public Ip</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+var apiurl="[[${rest_url}]]";
+function GetPublicIp()
+{
+	var serverurl=apiurl.concat("/api/get-public-ip");
+	var token=$("#querytoken").val();
+
+	console.log(token);
+	console.log(serverurl);
+	$.ajax({
+		type: 'GET',
+		url: serverurl,
+		headers: {
+			"Authorization": token
+		},
+        contentType: "application/json",
+        dataType: "json",
+		success: function (response) {
+            console.log(JSON.stringify(response));
+        	$("#result").text(JSON.stringify(response));
+			},
+		error: function (request, status, error) {
+			$("#result").text(request.responseText);
+		}
+	});
+}
+
+function GetToken() {
+	var inputurl = apiurl.concat("/mqtt/get-token");
+    $.ajax({
+        type: 'GET',
+        url: inputurl,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            console.log(JSON.stringify(response));
+            $("#gettoken").text(JSON.stringify(response));
+        },
+        error: function (request, status, error) {
+        	$("#gettoken").text(request.responseText);
+        }
+    });
+}
+
+$(document).ready(function () {
+    $("#btnPublicIp").click(function () {
+    	GetPublicIp();
+    });
+    
+    $("#btnToken").click(function () {
+    	GetToken();
+    });
+});
+</script>
+</head>
+<body>
+	<label>Token</label>
+	<input id="querytoken" type="text" placeholder="Token" value="Token">
+	</p>
+	<p><button id="btnToken">Get Token</button></p>
+    <p>Buttons</p>
+    <button id="btnPublicIp">Public IP</button>
+    <p id="gettoken">token
+    <p>
+    <p id="result">result
+    <p>
+</body>
+</html>

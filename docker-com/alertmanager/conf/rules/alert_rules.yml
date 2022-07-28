@@ -1,0 +1,113 @@
+groups:
+    - name: AlertList
+      rules:
+      - alert: UAT TW GCP-USE
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m])) < 190 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpuse[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpuse[5m])) >= 190 and ad_tunnel_latency_uat_tw_gcpus > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(190)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(190)."
+          username: "@channel"
+      - alert: UAT TW GCP-US
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m])) < 190 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[5m])) >= 190 and ad_tunnel_latency_uat_tw_gcpus > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(190)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(190)."
+          username: "@channel"
+      - alert: UAT TW GCP-SG
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpsg[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpsg[6m:1m])) < 52 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpsg[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpsg[5m])) >= 52 and ad_tunnel_latency_uat_tw_gcpsg > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(52)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(52)."
+          username: "@channel"
+      - alert: UAT TW GCP-KR
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpkr[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpkr[6m:1m])) < 52 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpkr[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpkr[5m])) >= 52 and ad_tunnel_latency_uat_tw_gcpkr > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(52)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(52)."
+          username: "@channel"
+      - alert: UAT TW GCP-JP
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpjp[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpjp[6m:1m])) < 40 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpjp[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpjp[5m])) >= 40 and ad_tunnel_latency_uat_tw_gcpjp > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(40)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(40)."
+          username: "@channel"
+      - alert: UAT TW GCP-HK
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcphk[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcphk[6m:1m])) < 14 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcphk[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcphk[5m])) >= 14 and ad_tunnel_latency_uat_tw_gcphk > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is over the threshold(14)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is over the threshold(14)."
+          username: "@channel"
+
+      - alert: UAT TW GCP-USE NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m])) >= 190 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpuse[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpuse[5m])) < 190 and ad_tunnel_latency_uat_tw_gcpuse > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(190)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(190)."
+          username: "@channel"
+      - alert: UAT TW GCP-US NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[6m:1m])) >= 190 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpus[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpus[5m])) < 190 and ad_tunnel_latency_uat_tw_gcpus > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(190)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(190)."
+          username: "@channel"
+      - alert: UAT TW GCP-SG NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpsg[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpsg[6m:1m])) >= 52 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpsg[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpsg[5m])) < 52 and ad_tunnel_latency_uat_tw_gcpsg > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(52)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(52)."
+          username: "@channel"
+      - alert: UAT TW GCP-KR NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpkr[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpkr[6m:1m])) >= 52 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpkr[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpkr[5m])) < 52 and ad_tunnel_latency_uat_tw_gcpkr > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(52)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(52)."
+          username: "@channel"
+      - alert: UAT TW GCP-JP NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpjp[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpjp[6m:1m])) >= 40 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcpjp[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcpjp[5m])) < 40 and ad_tunnel_latency_uat_tw_gcpjp > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(40)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(40)."
+          username: "@channel"
+      - alert: UAT TW GCP-HK NORMAL
+        expr: sum(sum_over_time(ad_tunnel_latency_uat_tw_gcphk[6m:1m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcphk[6m:1m])) >= 14 and sum(sum_over_time(ad_tunnel_latency_uat_tw_gcphk[5m]))/sum(count_over_time(ad_tunnel_latency_uat_tw_gcphk[5m])) < 14 and ad_tunnel_latency_uat_tw_gcphk > 0
+        for: 2s
+        labels:
+          user: nwarp
+        annotations:
+          summary: "Latency value is within the threshold(14)!"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} latency value is within the threshold(14)."
+          username: "@channel"
+
